@@ -39,7 +39,8 @@
 #include <tag.h>
 #include <string.h>
 #include <id3v2framefactory.h>
-
+#include <tbytevector.h>
+#include <tnamedbytevectorstream.h>
 #include "tag_c.h"
 
 using namespace TagLib;
@@ -89,6 +90,13 @@ void taglib_free(void* pointer)
 ////////////////////////////////////////////////////////////////////////////////
 // TagLib::File wrapper
 ////////////////////////////////////////////////////////////////////////////////
+
+TagLib_File *taglib_file_new(const char *filename, const char *data, int size)
+{
+  const ByteVector byteVector(data, size);
+  NamedByteVectorStream stream(byteVector, FileName(filename));
+  return reinterpret_cast<TagLib_File *>(FileRef(&stream));
+}
 
 TagLib_File *taglib_file_new(const char *filename)
 {
