@@ -341,3 +341,9 @@ File *FileRef::create(FileName fileName, bool readAudioProperties,
 {
   return createInternal(fileName, readAudioProperties, audioPropertiesStyle);
 }
+
+File *FileRef::create(IOStream *iostream, bool readAudioProperties,
+                      AudioProperties::ReadStyle audioPropertiesStyle) // static
+{
+  return createInternal(iostream, readAudioProperties, audioPropertiesStyle);
+}

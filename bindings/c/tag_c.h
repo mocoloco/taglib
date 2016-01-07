@@ -113,6 +113,15 @@ typedef enum {
 TAGLIB_C_EXPORT TagLib_File *taglib_file_new(const char *filename);
 
 /*!
+ * Creates a TagLib file based on \a named filestream data.  TagLib will try to guess the file
+ * type.
+ *
+ * \returns NULL if the file type cannot be determined or the file cannot
+ * be opened.
+ */
+TAGLIB_C_EXPORT TagLib_File *taglib_nemaed_filestream_new(const char *filename, const char *data, unsigned int size);
+
+/*!
  * Creates a TagLib file based on \a filename.  Rather than attempting to guess
  * the type, it will use the one specified by \a type.
  */

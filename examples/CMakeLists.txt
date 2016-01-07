@@ -19,8 +19,18 @@ target_link_libraries(tagreader tag)
 
 ########### next target ###############
 
+add_executable(tagreader_str tagreader_str.cpp)
+target_link_libraries(tagreader_str tag)
+
+########### next target ###############
+
 add_executable(tagreader_c tagreader_c.c)
 target_link_libraries(tagreader_c tag_c)
+
+########### next target ###############
+
+add_executable(tagreader_str_c tagreader_str_c.c)
+target_link_libraries(tagreader_str_c tag_c)
 
 ########### next target ###############
 

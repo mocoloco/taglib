@@ -91,11 +91,11 @@ void taglib_free(void* pointer)
 // TagLib::File wrapper
 ////////////////////////////////////////////////////////////////////////////////
 
-TagLib_File *taglib_file_new(const char *filename, const char *data, int size)
+TagLib_File *taglib_nemaed_filestream_new(const char *filename, const char *data, unsigned int size)
 {
   const ByteVector byteVector(data, size);
   NamedByteVectorStream stream(byteVector, FileName(filename));
-  return reinterpret_cast<TagLib_File *>(FileRef(&stream));
+  return reinterpret_cast<TagLib_File *>(FileRef::create(&stream));
 }
 
 TagLib_File *taglib_file_new(const char *filename)

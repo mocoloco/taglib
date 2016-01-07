@@ -271,7 +271,9 @@ namespace TagLib {
                         bool readAudioProperties = true,
                         AudioProperties::ReadStyle audioPropertiesStyle = AudioProperties::Average);
 
-
+    static File *create(IOStream *iostream,
+                        bool readAudioProperties = true,
+                        AudioProperties::ReadStyle audioPropertiesStyle = AudioProperties::Average);
   private:
     class FileRefPrivate;
     FileRefPrivate *d;
