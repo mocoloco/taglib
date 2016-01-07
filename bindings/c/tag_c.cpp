@@ -41,6 +41,7 @@
 #include <id3v2framefactory.h>
 #include <tbytevector.h>
 #include <tnamedbytevectorstream.h>
+#include "mpegproperties.h"
 #include "tag_c.h"
 
 using namespace TagLib;
@@ -101,6 +102,36 @@ TagLib_File *taglib_nemaed_filestream_new(const char *filename, const char *data
 TagLib_File *taglib_file_new(const char *filename)
 {
   return reinterpret_cast<TagLib_File *>(FileRef::create(filename));
+}
+
+TagLib_File *taglib_nemaed_filestream_new_type(const char *filename, const char *data, unsigned int size, TagLib_File_Type type)
+{
+  const ByteVector byteVector(data, size);
+  NamedByteVectorStream stream(byteVector, FileName(filename));
+  switch(type) {
+  case TagLib_File_MPEG:
+    return reinterpret_cast<TagLib_File *>(new MPEG::File(&stream, ID3v2::FrameFactory::instance()));
+  case TagLib_File_OggVorbis:
+    return reinterpret_cast<TagLib_File *>(new Ogg::Vorbis::File(&stream));
+  case TagLib_File_FLAC:
+    return reinterpret_cast<TagLib_File *>(new FLAC::File(&stream, ID3v2::FrameFactory::instance()));
+  case TagLib_File_MPC:
+    return reinterpret_cast<TagLib_File *>(new MPC::File(&stream));
+  case TagLib_File_OggFlac:
+    return reinterpret_cast<TagLib_File *>(new Ogg::FLAC::File(&stream));
+  case TagLib_File_WavPack:
+    return reinterpret_cast<TagLib_File *>(new WavPack::File(&stream));
+  case TagLib_File_Speex:
+    return reinterpret_cast<TagLib_File *>(new Ogg::Speex::File(&stream));
+  case TagLib_File_TrueAudio:
+    return reinterpret_cast<TagLib_File *>(new TrueAudio::File(&stream));
+  case TagLib_File_MP4:
+    return reinterpret_cast<TagLib_File *>(new MP4::File(&stream));
+  case TagLib_File_ASF:
+    return reinterpret_cast<TagLib_File *>(new ASF::File(&stream));
+  default:
+    return 0;
+  }  
 }
 
 TagLib_File *taglib_file_new_type(const char *filename, TagLib_File_Type type)

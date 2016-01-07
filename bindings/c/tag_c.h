@@ -128,6 +128,12 @@ TAGLIB_C_EXPORT TagLib_File *taglib_nemaed_filestream_new(const char *filename, 
 TAGLIB_C_EXPORT TagLib_File *taglib_file_new_type(const char *filename, TagLib_File_Type type);
 
 /*!
+ * Creates a TagLib file based on \a named filestream data.  Rather than attempting to guess
+ * the type, it will use the one specified by \a type.
+ */
+TAGLIB_C_EXPORT TagLib_File *taglib_nemaed_filestream_new_type(const char *filename, const char *data, unsigned int size, TagLib_File_Type type);
+
+/*!
  * Frees and closes the file.
  */
 TAGLIB_C_EXPORT void taglib_file_free(TagLib_File *file);
